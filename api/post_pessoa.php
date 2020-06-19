@@ -16,12 +16,10 @@ if(!empty($data)){
  	}
  	catch (PDOException $e) {
  		http_response_code(400);
-		echo json_encode(array("mensagem" => "Parâmetros Inválidos"));
+		echo json_encode(array("mensagem" => $e));
 	}
 }
 else {
 	http_response_code(400);
 	echo json_encode(array("mensagem" => "Não foram enviados parâmetros"));
 }
-
-?>

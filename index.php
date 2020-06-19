@@ -4,7 +4,7 @@ header("Access-Control-Allow-Origin: *");
 //header("Access-Control-Allow-Methods: GET, POST,");
 
 //define('PASTAPROJETO', 'AulaBanco');
-define('PASTAPROJETO', 'PhpBackEnd');
+define('PASTAPROJETO', 'PASTAPROJETO');
 
 /* Função criada para retornar o tipo de requisição */
 function checkRequest()
@@ -31,6 +31,7 @@ function checkRequest()
 }
 
 $answer = checkRequest();
+//echo "Tipo de requisição: " . $answer . "\n";
 
 // localhost/PhpBackEnd/pessoas
 // localhost/PhpBackEnd/conteudo 
@@ -43,7 +44,7 @@ $request = $_SERVER['REQUEST_URI'];
 $args = explode('/', rtrim($request, '/'));
 // localhost/PhpBackEnd/pessoas
 
-// $args[0] localhost
+//$args[0] localhost
 // $args[1] PhpBackEnd
 // $args[2] pessoas
 
@@ -69,15 +70,19 @@ switch ($request) {
 	case '':
 		require __DIR__ . '/api/api.php';
 		break;
-	case '/' . PASTAPROJETO . '/pessoas':
+	case '/' . PASTAPROJETO . '/pessoa':
 		require __DIR__ . '/api/' . $answer . '_pessoa.php';
 		break;
 	case '/' . PASTAPROJETO . '/conteudo':
 		require __DIR__ . '/api/' . $answer . '_conteudo.php';
 		break;
-	case '/' . PASTAPROJETO . '/universidades':
+	case '/' . PASTAPROJETO . '/universidadePessoas':
+		require __DIR__ . '/api/' . $answer . '_pessoaUniversidade.php';
+		break;
+	case '/' . PASTAPROJETO . '/universidade':
 		require __DIR__ . '/api/' . $answer . '_universidade.php';
 		break;
+
 	default:
 		//require __DIR__ . '/api/404.php';
 		break;

@@ -1,139 +1,140 @@
--- MySQL dump 10.13  Distrib 5.7.27, for Linux (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost    Database: diario
--- ------------------------------------------------------
--- Server version	5.7.27-0ubuntu0.18.04.1
+-- Host: 127.0.0.1
+-- Tempo de geração: 19-Jun-2020 às 05:50
+-- Versão do servidor: 10.4.11-MariaDB
+-- versão do PHP: 7.2.31
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Table structure for table `conteudo`
+-- Banco de dados: `aula`
 --
-DROP DATABASE IF EXISTS `aula`;
-CREATE DATABASE  `aula`;
+CREATE DATABASE IF NOT EXISTS `aula` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
 USE `aula`;
 
-DROP TABLE IF EXISTS `conteudo`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `conteudo`
+--
+
 CREATE TABLE `conteudo` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `titulo` varchar(120) NOT NULL,
-  `descricao` longtext NOT NULL,
-  `horario` varchar(30) NOT NULL,
-  `universidade_id` int(30) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `conteudo`
+-- Estrutura da tabela `pessoas`
 --
 
-LOCK TABLES `conteudo` WRITE;
-/*!40000 ALTER TABLE `conteudo` DISABLE KEYS */;
-INSERT INTO `conteudo` VALUES (1,'Dev Web','Desenvolvimento Backend e Frontend','19:00',1);
-INSERT INTO `conteudo` VALUES (2,'PI','Projetos Interdisciplinares','19:00',1);
-INSERT INTO `conteudo` VALUES (3,'Tópicos Especiais','Ciência dos Dados','20:40',1);
-INSERT INTO `conteudo` VALUES (4,'Dev Mobile','Aplicativos Híbridos e Nativos','20:40',1);
-INSERT INTO `conteudo` VALUES (5,'POO','Estrutura de Dados','19:00',1);
-/*!40000 ALTER TABLE `conteudo` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `universidade_pessoas`
---
-
-DROP TABLE IF EXISTS `universidade_pessoas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `universidade_pessoas` (
-  `id_pessoa` int(11) DEFAULT NULL,
-  `id_universidade` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `universidade_pessoas`
---
-
-LOCK TABLES `universidade_pessoas` WRITE;
-/*!40000 ALTER TABLE `universidade_pessoas` DISABLE KEYS */;
-/*!40000 ALTER TABLE `universidade_pessoas` ENABLE KEYS */;
-INSERT INTO `universidade_pessoas` VALUES (1,1),(2,2);
-UNLOCK TABLES;
-
---
--- Table structure for table `pessoas`
---
-
-DROP TABLE IF EXISTS `pessoas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pessoas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(200) DEFAULT NULL,
-  `idade` int(11) DEFAULT NULL,
-  `peso` double DEFAULT NULL,
-  `altura` double DEFAULT NULL,
-  `sexo` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `id` int(11) NOT NULL,
+  `nome` text COLLATE utf8_bin NOT NULL,
+  `altura` decimal(10,0) NOT NULL,
+  `idade` int(11) NOT NULL,
+  `peso` int(11) NOT NULL,
+  `sexo` varchar(255) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `pessoas`
+-- Extraindo dados da tabela `pessoas`
 --
 
-LOCK TABLES `pessoas` WRITE;
-/*!40000 ALTER TABLE `pessoas` DISABLE KEYS */;
-INSERT INTO `pessoas` VALUES (1,'Joao Silva',20,80,1.8,1),(2,'Maíra Lemos',25,50,1.6,2);
-/*!40000 ALTER TABLE `pessoas` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `pessoas` (`id`, `nome`, `altura`, `idade`, `peso`, `sexo`) VALUES
+(1, 'Otavio', '176', 27, 94, 'Masculino'),
+(2, 'Matheus', '186', 24, 80, 'Masculino');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `universidade`
+-- Estrutura da tabela `pessoas_universidade`
 --
 
-DROP TABLE IF EXISTS `universidade`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pessoas_universidade` (
+  `id_pessoa` int(11) NOT NULL,
+  `id_universidade` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Extraindo dados da tabela `pessoas_universidade`
+--
+
+INSERT INTO `pessoas_universidade` (`id_pessoa`, `id_universidade`) VALUES
+(1, 1),
+(2, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `universidade`
+--
+
 CREATE TABLE `universidade` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(200) DEFAULT NULL,
-  `campus` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `id` int(11) NOT NULL,
+  `nome` text COLLATE utf8_bin NOT NULL,
+  `campus` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `universidade`
+-- Extraindo dados da tabela `universidade`
 --
 
-LOCK TABLES `universidade` WRITE;
-/*!40000 ALTER TABLE `universidade` DISABLE KEYS */;
-/*!40000 ALTER TABLE `universidade` ENABLE KEYS */;
-INSERT INTO `universidade` VALUES (1,'UniBH','Estoril'),(2,'UniBH','Cristiano Machado');
+INSERT INTO `universidade` (`id`, `nome`, `campus`) VALUES
+(1, 'Uni-BH', 'Estoril'),
+(2, 'Uni-BH', 'Cristiano Machado'),
+(3, 'Una', 'Cristiano Machado');
 
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+--
+-- Índices para tabelas despejadas
+--
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Índices para tabela `conteudo`
+--
+ALTER TABLE `conteudo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `pessoas`
+--
+ALTER TABLE `pessoas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `universidade`
+--
+ALTER TABLE `universidade`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `pessoas`
+--
+ALTER TABLE `pessoas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `universidade`
+--
+ALTER TABLE `universidade`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2019-10-12  1:55:32

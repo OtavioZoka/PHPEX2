@@ -6,12 +6,8 @@ class Universidade extends Conexao
     private $nome;
     private $campus;
 
-    public function __construct($id, $nome, $campus)
-    {
-        $this->id = $id;
-        $this->nome = $nome;
-        $this->campus = $campus;
-    }
+
+
     public function getId()
     {
         return $this->id;
@@ -42,7 +38,7 @@ class Universidade extends Conexao
     }
     public function insert($obj)
     {
-        $sql = "INSERT INTO universidades(nomes,campus) VALUES (:nome,:campus)";
+        $sql = "INSERT INTO universidade(nome,campus) VALUES (:nome,:campus)";
         $consulta = Conexao::prepare($sql);
         $consulta->bindValue('nome',  $obj->nome);
         $consulta->bindValue('campus', $obj->campus);
@@ -67,7 +63,7 @@ class Universidade extends Conexao
 
     public function delete($obj, $id = null)
     {
-        $sql =  "DELETE FROM universidades WHERE id = :id";
+        $sql =  "DELETE FROM universidade WHERE id = :id";
         $consulta = Conexao::prepare($sql);
         $consulta->bindValue('id', $id);
         $consulta->execute();
@@ -76,7 +72,7 @@ class Universidade extends Conexao
 
     public function find($id = null)
     {
-        $sql =  "SELECT * FROM universidades WHERE id = :id";
+        $sql =  "SELECT * FROM universidade WHERE id = :id";
         $consulta = Conexao::prepare($sql);
         $consulta->bindValue('id', $id);
         $consulta->execute();
@@ -85,7 +81,7 @@ class Universidade extends Conexao
 
     public function findAll()
     {
-        $sql = "SELECT * FROM universidades";
+        $sql = "SELECT * FROM universidade";
         $consulta = Conexao::prepare($sql);
         $consulta->execute();
         return $consulta->fetchAll();
